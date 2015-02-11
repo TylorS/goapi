@@ -33,8 +33,8 @@ func (a *App) Use(middlewares ...middleware.Middleware) {
 
 func (a *App) RegisterBlueprint(blueprint BluePrint, prefix string) {
 	blueprint.RegisterRouter(a, prefix)
-	blueprint.Routes()
 	blueprint.Initialize()
+	blueprint.Routes()
 }
 
 func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {

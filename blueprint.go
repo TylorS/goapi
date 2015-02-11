@@ -10,8 +10,6 @@ type Blueprint struct {
 	App
 }
 
-func (b *Blueprint) Initialize() {}
-
 func (b *Blueprint) RegisterRouter(app *App, prefix string) {
 	b.DB = app.DB
 	b.Router = app.Router.Subrouter(prefix)
