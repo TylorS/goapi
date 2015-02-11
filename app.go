@@ -12,7 +12,7 @@ import (
 )
 
 type App struct {
-	DB          *sql.DB
+	DB          sql.DB
 	Router      *router.Router
 	Middlewares []middleware.Middleware
 }
@@ -33,6 +33,7 @@ func (a *App) Use(middlewares ...middleware.Middleware) {
 
 func (a *App) RegisterBlueprint(blueprint BluePrint, prefix string) {
 	blueprint.RegisterRouter(a, prefix)
+	blueprint.Initialize()
 	blueprint.Routes()
 }
 
