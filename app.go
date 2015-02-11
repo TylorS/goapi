@@ -1,6 +1,7 @@
 package goapi
 
 import (
+	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -11,6 +12,7 @@ import (
 )
 
 type App struct {
+	DB          *sql.DB
 	Router      *router.Router
 	Middlewares []middleware.Middleware
 }
