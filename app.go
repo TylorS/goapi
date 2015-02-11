@@ -1,7 +1,6 @@
 package goapi
 
 import (
-	"database/sql"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,7 +11,6 @@ import (
 )
 
 type App struct {
-	DB          *sql.DB
 	Router      *router.Router
 	Middlewares []middleware.Middleware
 }
@@ -27,8 +25,9 @@ func (a *App) HandleFunc(path string, handler http.HandlerFunc) *mux.Route {
 
 func (a *App) Use(middlewares ...middleware.Middleware) {
 	for _, middleware := range middlewares {
-		a.Router.Middlewares = append(a.Middlewares, middleware)
+		a.Middlewares = append(a.Middlewares, middleware)
 	}
+	a.Router.Middlewares = append(a.Router.Middlewares, a.Middlewares...)
 }
 
 func (a *App) RegisterBlueprint(blueprint BluePrint, prefix string) {
