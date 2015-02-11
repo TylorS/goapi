@@ -12,7 +12,7 @@ import (
 )
 
 type App struct {
-	DB          sql.DB
+	DB          *sql.DB
 	Router      *router.Router
 	Middlewares []middleware.Middleware
 }
